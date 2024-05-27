@@ -5,6 +5,7 @@ nbbuild/
 dist/
 nbdist/
 .idea/
+*.gitignore
 *.nbattrs
 
 # Generic files
@@ -26,6 +27,7 @@ nbdist/
 # Maven specific files
 target/
 
+
 # Gradle specific files
 .gradle/
 build/
@@ -33,3 +35,5 @@ build/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+

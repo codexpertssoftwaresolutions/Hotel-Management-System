@@ -8,6 +8,7 @@ import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javaswingdev.drawer.EventDrawer;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import model.DrawerHeader;
 
 public class HRDashBoard extends javax.swing.JFrame {
@@ -20,9 +21,11 @@ public class HRDashBoard extends javax.swing.JFrame {
                 .header(new DrawerHeader())
                 .enableScroll(true)
                 .addChild(new DrawerItem("Dashboard").build())
-                .addChild(new DrawerItem("Available Spaces").build())
-                .addChild(new DrawerItem("Parking Manage").build())
-                .addChild(new DrawerItem("Ticket Manage").build())
+                .addChild(new DrawerItem("Manage Employees").build())
+                .addChild(new DrawerItem("Manage Payroll").build())
+                .addChild(new DrawerItem("Manage Resignation").build())
+                .addChild(new DrawerItem("Manage Attendance").build())
+                .addChild(new DrawerItem("Manage Administrators").build())
                 .addFooter(new DrawerItem("Log out").build())
                 .event(new EventDrawer() {
                     @Override
@@ -34,7 +37,7 @@ public class HRDashBoard extends javax.swing.JFrame {
                         }
                     }
                 }).build();
-        
+
         Dashboard dashboard = new Dashboard();
         bottomPanel.add(dashboard, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(this);
@@ -47,27 +50,29 @@ public class HRDashBoard extends javax.swing.JFrame {
                 .header(new DrawerHeader())
                 .enableScroll(true)
                 .addChild(new DrawerItem("Dashboard").build())
-                .addChild(new DrawerItem("Available Spaces").build())
-                .addChild(new DrawerItem("Parking Manage").build())
-                .addChild(new DrawerItem("Ticket Manage").build())
+                .addChild(new DrawerItem("Manage Employees").build())
+                .addChild(new DrawerItem("Manage Payroll").build())
+                .addChild(new DrawerItem("Manage Resignation").build())
+                .addChild(new DrawerItem("Manage Attendance").build())
+                .addChild(new DrawerItem("Manage Administrators").build())
                 .addFooter(new DrawerItem("Log out").build())
                 .event(new EventDrawer() {
                     @Override
                     public void selected(int i, DrawerItem di) {
-                        if (i != 4) { // logout index
+                        if (i != 6) { // logout index
                             setActiveTab(i);
                         } else {
                             System.out.println("Log out");
                         }
                     }
                 }).build();
-        
+
         Dashboard dashboard = new Dashboard();
         bottomPanel.add(dashboard, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
     }
-    
+
     private void setActiveTab(int tab) { // tab -> clicked tab index
         bottomPanel.removeAll();
 
@@ -75,14 +80,20 @@ public class HRDashBoard extends javax.swing.JFrame {
             Dashboard dashboard = new Dashboard();
             bottomPanel.add(dashboard, BorderLayout.CENTER);
         } else if (tab == 1) {
-//            Available available = new Available(drawer);
-//            bottomPanel.add(available, BorderLayout.CENTER);
+            Employees employees = new Employees();
+            bottomPanel.add(employees, BorderLayout.CENTER);
         } else if (tab == 2) {
-//            Parking parking = new Parking(drawer);
-//            bottomPanel.add(parking, BorderLayout.CENTER);
+            Salary salary = new Salary();
+            bottomPanel.add(salary, BorderLayout.CENTER);
         } else if (tab == 3) {
-//            Ticket ticket = new Ticket(drawer);
-//            bottomPanel.add(ticket, BorderLayout.CENTER);
+//            Resignation resignation = new Resignation(this,true);
+//            bottomPanel.add(resignation, BorderLayout.CENTER);
+        } else if (tab == 4) {
+            Attendance attendance = new Attendance();
+            bottomPanel.add(attendance, BorderLayout.CENTER);
+        } else if (tab == 5) {
+            Administrators admin = new Administrators();
+            bottomPanel.add(admin, BorderLayout.CENTER);
         }
 
         drawer.hide();
@@ -90,8 +101,6 @@ public class HRDashBoard extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
     }
-    
-    
 
     private void toggleMenu() {
         if (drawer.isShow()) {
@@ -121,6 +130,7 @@ public class HRDashBoard extends javax.swing.JFrame {
 
         menuButton.setText("|||");
         menuButton.setBorder(null);
+        menuButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         menuButton.setPreferredSize(new java.awt.Dimension(50, 50));
         menuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +169,11 @@ public class HRDashBoard extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
+//        UIManager.put("Button.arc", 150);
+//        UIManager.put("TextComponent.arc", 999);
+//        UIManager.put("Component.arc", 999);
+        UIManager.put("Component.arrowType", "triangle");
+        UIManager.put("TextComponent.innerFocusWidth", 1);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
