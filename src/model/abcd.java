@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MySQL {
+public class abcd {
 
     private static Connection connection;
     private static final String db = "hotelsystem";
