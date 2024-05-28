@@ -5,8 +5,10 @@ nbbuild/
 dist/
 nbdist/
 .idea/
+*.gitignore
 *.nbattrs
 .gitignore
+
 
 # Generic files
 *.class
@@ -26,6 +28,7 @@ nbdist/
 
 # Maven specific files
 target/
+
 
 # Gradle specific files
 .gradle/
