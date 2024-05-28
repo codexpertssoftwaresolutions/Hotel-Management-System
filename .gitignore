@@ -8,6 +8,7 @@ nbdist/
 *.gitignore
 *.nbattrs
 
+
 # Generic files
 *.class
 *.log
@@ -35,5 +36,3 @@ build/
 # OS specific files
 .DS_Store
 Thumbs.db
-
-
