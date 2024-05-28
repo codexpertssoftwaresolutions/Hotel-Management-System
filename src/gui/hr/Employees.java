@@ -135,9 +135,6 @@ public class Employees extends javax.swing.JPanel {
         tableSelection.put("salary", salary);
         tableSelection.put("status", status);
 
-        AddNewEmployee a = new AddNewEmployee();
-        a.seteditablefalse();
-        
 
         if (n == 2) {//edit employee
             AddNewEmployee ade = new AddNewEmployee(tableSelection);
