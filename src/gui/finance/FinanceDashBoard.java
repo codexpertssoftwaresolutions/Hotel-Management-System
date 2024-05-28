@@ -12,6 +12,8 @@ import model.DrawerHeader;
 
 public class FinanceDashBoard extends javax.swing.JFrame {
 
+    private ResultSet loggedUser;
+    
     private DrawerController drawer;
 
     public FinanceDashBoard(ResultSet loggedUser) {
@@ -40,6 +42,7 @@ public class FinanceDashBoard extends javax.swing.JFrame {
         bottomPanel.add(dashboard, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
+        this.loggedUser = loggedUser;
 
     }
 
@@ -146,7 +149,7 @@ public class FinanceDashBoard extends javax.swing.JFrame {
             Utility utility = new Utility();
             bottomPanel.add(utility, BorderLayout.CENTER);
         } else if (tab == 2) {
-            ExtraExpenses extraExpenses = new ExtraExpenses();
+            ExtraExpenses extraExpenses = new ExtraExpenses(loggedUser);
             bottomPanel.add(extraExpenses, BorderLayout.CENTER);
         } else if (tab == 3) {
             Salary salary = new Salary();
