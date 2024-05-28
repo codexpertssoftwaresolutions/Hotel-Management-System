@@ -1,0 +1,258 @@
+May 28, 2024 11:12:39 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wf%'' at line 6
+May 28, 2024 11:12:39 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wfa%'' at line 6
+May 28, 2024 11:12:39 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wfas%'' at line 6
+May 28, 2024 11:12:39 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wfas%'' at line 6
+May 28, 2024 11:12:45 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'drg%'' at line 6
+May 28, 2024 11:12:45 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'drg%'' at line 6
+May 28, 2024 11:12:45 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'drg%'' at line 6
+May 28, 2024 11:12:46 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'dr%'' at line 6
+May 28, 2024 11:12:46 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'd%'' at line 6
+May 28, 2024 11:12:47 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2%'' at line 6
+May 28, 2024 11:12:47 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '20%'' at line 6
+May 28, 2024 11:12:47 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '200%'' at line 6
+May 28, 2024 11:12:48 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2002%'' at line 6
+May 28, 2024 11:12:50 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '20024%'' at line 6
+May 28, 2024 11:12:51 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2002%'' at line 6
+May 28, 2024 11:12:52 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '200210%'' at line 6
+May 28, 2024 11:12:52 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '200210%'' at line 6
+May 28, 2024 11:12:53 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '20021%'' at line 6
+May 28, 2024 11:12:53 PM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2002%'' at line 6
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:19:54 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:05 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:08 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:21:12 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:22:46 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Can not issue empty query.
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:30:26 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:22 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:36:32 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:39:08 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:40:09 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Column 'c' not found.
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:42:02 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Column 'nic' not found.
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:43:41 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:44:13 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getActiveEmployees
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getDepartmentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getPresentCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getAdministratorCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getPositionCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getResignedEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 12:45:25 AM gui.hr.Dashboard getCurrentlyWorkingEmployeeCount
+WARNING: java.sql.SQLException: Before start of result set
+May 29, 2024 1:00:12 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
+May 29, 2024 1:00:56 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
+May 29, 2024 1:02:31 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
+May 29, 2024 1:03:03 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
