@@ -2,35 +2,22 @@ package gui.hr;
 
 import java.util.List;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Salary extends javax.swing.JPanel {
 
-     public static void generatePaysheets(List<Employee> employees) {
-        try {
-            String reportPath = "path/to/your/paysheet_template.jasper";
+    HashMap<String, String> salary_info = new HashMap<>();
 
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(employees);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, null, dataSource);
-
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "Paysheets.pdf");
-
-        } catch (JRException e) {
-            e.printStackTrace();
-        }
-    }
-     
-    
     public Salary() {
         initComponents();
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
@@ -74,6 +61,10 @@ public class Salary extends javax.swing.JPanel {
         }
     }
 
+//    private void generatePaySheets() {
+//        List<Employee> employees = PayrollTableModel.getEmployees();
+//        PaysheetGenerator.generatePaysheets(employees);
+//    }
     private void loadDepartment() {
         try {
             ResultSet resultSet = MySQL.execute("SELECT * FROM `department`");
@@ -104,12 +95,28 @@ public class Salary extends javax.swing.JPanel {
     }
 
     private void generatePaySheets() {
-        generatePaysheets(employees);
+        try {
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("Parameter1", String.valueOf(salary_info.get("payroll_id")));
+            parameters.put("Parameter2", String.valueOf(salary_info.get("full_name")));
+            parameters.put("Parameter3", String.valueOf(salary_info.get("nic")));
+            parameters.put("Parameter4", String.valueOf(salary_info.get("basic_salary")));
+            parameters.put("Parameter5", String.valueOf(salary_info.get("epf")));
+            parameters.put("Parameter6", String.valueOf(salary_info.get("etf")));
+            parameters.put("Parameter7", String.valueOf(salary_info.get("taxes")));
+            parameters.put("Parameter8", String.valueOf(salary_info.get("net_salary")));
+            parameters.put("Parameter9", String.valueOf(salary_info.get("pay_date")));
+
+            JREmptyDataSource datasource = new JREmptyDataSource();
+            JasperPrint report = JasperFillManager.fillReport("src/reports/paysheets.jasper", parameters, datasource);
+            JasperViewer.viewReport(report, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void printPaysheets() {
-//        List<Employee> employees = payrollTableModel.getEmployees();
-//        PaysheetPrinter.printPaysheets(employees);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -197,6 +204,7 @@ public class Salary extends javax.swing.JPanel {
         });
 
         generatePaysheet.setText("Generate Paysheets");
+        generatePaysheet.setEnabled(false);
         generatePaysheet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generatePaysheetActionPerformed(evt);
@@ -204,6 +212,7 @@ public class Salary extends javax.swing.JPanel {
         });
 
         printPaysheet.setText("Print Paysheets");
+        printPaysheet.setEnabled(false);
         printPaysheet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printPaysheetActionPerformed(evt);
@@ -260,6 +269,11 @@ public class Salary extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -292,6 +306,39 @@ public class Salary extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_generatePaysheetActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        int row = jTable1.getSelectedRow();
+        if (evt.getClickCount() == 2) {
+            generatePaysheet.setEnabled(true);
+            printPaysheet.setEnabled(true);
+
+            String payroll_id = String.valueOf(jTable1.getValueAt(row, 0));
+            String full_name = String.valueOf(jTable1.getValueAt(row, 1));
+            String nic = String.valueOf(jTable1.getValueAt(row, 2));
+            String basic_salary = String.valueOf(jTable1.getValueAt(row, 3));
+            String epf = String.valueOf(jTable1.getValueAt(row, 4));
+            String etf = String.valueOf(jTable1.getValueAt(row, 5));
+            String taxes = String.valueOf(jTable1.getValueAt(row, 6));
+            String net_salary = String.valueOf(jTable1.getValueAt(row, 7));
+            String payment_date = String.valueOf(jTable1.getValueAt(row, 8));
+
+            salary_info.put("payroll_id", payroll_id);
+            salary_info.put("full_name", full_name);
+            salary_info.put("nic", nic);
+            salary_info.put("basic_salary", basic_salary);
+            salary_info.put("epf", epf);
+            salary_info.put("etf", etf);
+            salary_info.put("taxes", taxes);
+            salary_info.put("net_salary", net_salary);
+            salary_info.put("pay_date", payment_date);
+
+            generatePaySheets();
+
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
