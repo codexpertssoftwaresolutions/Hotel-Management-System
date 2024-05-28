@@ -234,6 +234,7 @@ public class Employees extends javax.swing.JPanel {
         });
         jPanel2.add(jButton1);
 
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jButton2.setText("Resign Employee");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
