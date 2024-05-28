@@ -16,7 +16,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
     public HashMap<String, Integer> positions = new HashMap<>();
 
     private Employees e;
-
+    
     public void setE(Employees e) {
         this.e = e;
     }
@@ -49,7 +49,6 @@ public class AddNewEmployee extends javax.swing.JFrame {
         jTextField6.putClientProperty("JComponent.roundRect", true);
         jTextField3.putClientProperty("JComponent.roundRect", true);
         textfieldLoad(tableSelection);
-        jLabel2.setText("Update Employee");
 
     }
 
@@ -555,8 +554,8 @@ public class AddNewEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    public static javax.swing.JTextField jTextField4;
+    public static javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
