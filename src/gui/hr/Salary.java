@@ -12,6 +12,7 @@ import model.MySQL;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class Salary extends javax.swing.JPanel {
@@ -80,7 +81,7 @@ public class Salary extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-           HRDashBoard.log1.warning(e.toString());
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -116,7 +117,24 @@ public class Salary extends javax.swing.JPanel {
     }
 
     private void printPaysheets() {
+        try {
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("Parameter1", String.valueOf(salary_info.get("payroll_id")));
+            parameters.put("Parameter2", String.valueOf(salary_info.get("full_name")));
+            parameters.put("Parameter3", String.valueOf(salary_info.get("nic")));
+            parameters.put("Parameter4", String.valueOf(salary_info.get("basic_salary")));
+            parameters.put("Parameter5", String.valueOf(salary_info.get("epf")));
+            parameters.put("Parameter6", String.valueOf(salary_info.get("etf")));
+            parameters.put("Parameter7", String.valueOf(salary_info.get("taxes")));
+            parameters.put("Parameter8", String.valueOf(salary_info.get("net_salary")));
+            parameters.put("Parameter9", String.valueOf(salary_info.get("pay_date")));
 
+            JREmptyDataSource datasource = new JREmptyDataSource();
+            JasperPrint jasperPrint = JasperFillManager.fillReport("src/reports/paysheets.jasper", parameters, datasource);
+            JasperPrintManager.printReport(jasperPrint, true);
+        } catch (Exception e) {
+            HRDashBoard.log1.warning(e.toString());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -293,7 +311,7 @@ public class Salary extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void printPaysheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPaysheetActionPerformed
-
+        printPaysheets();
 
     }//GEN-LAST:event_printPaysheetActionPerformed
 
