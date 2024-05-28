@@ -1,26 +1,80 @@
-
 package gui.hr;
 
+import java.util.List;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import model.MySQL;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class Salary extends javax.swing.JPanel {
 
+     public static void generatePaysheets(List<Employee> employees) {
+        try {
+            String reportPath = "path/to/your/paysheet_template.jasper";
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(employees);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, null, dataSource);
+
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "Paysheets.pdf");
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+     
+    
     public Salary() {
         initComponents();
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
-        render.setHorizontalAlignment(SwingConstants.CENTER);        
+        render.setHorizontalAlignment(SwingConstants.CENTER);
         jTable1.setDefaultRenderer(Object.class, render);
         jTable1.setAutoCreateRowSorter(true);
         loadDepartment();
     }
-    
-    
-      private void loadDepartment() {
+
+    private void loadEmployeeTable(String department) {
+        String query = "SELECT * FROM payroll \n"
+                + "INNER JOIN employee ON (employee.nic=payroll.employee_nic)\n"
+                + "INNER JOIN employee_role ON (employee_role.employee_role_id=employee.employee_role_id) "
+                + "INNER JOIN department ON (employee_role.department_id=department.department_id) WHERE `department_name`='" + department + "'";
+
+        try {
+            java.sql.ResultSet resultSet = MySQL.execute(query);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            while (resultSet.next()) {
+                Vector<String> vector = new Vector<>();
+                vector.add(resultSet.getString("payroll_id"));
+                vector.add(resultSet.getString("employee_fname") + " " + resultSet.getString("employee_lname"));
+                vector.add(resultSet.getString("employee_nic"));
+                vector.add(resultSet.getString("basic_salary"));
+                vector.add(resultSet.getString("epf"));
+                vector.add(resultSet.getString("etf"));
+                vector.add(resultSet.getString("taxes"));
+                vector.add(resultSet.getString("net_salary"));
+                vector.add(resultSet.getString("payment_date"));
+
+                model.addRow(vector);
+                jTable1.setModel(model);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadDepartment() {
         try {
             ResultSet resultSet = MySQL.execute("SELECT * FROM `department`");
 
@@ -31,12 +85,31 @@ public class Salary extends javax.swing.JPanel {
                 vector.add(resultSet.getString("department_name"));
 //                departments.put(resultSet.getString("department_name"), resultSet.getInt("department_id"));
                 DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-                jComboBox1.setModel(model);
+                departmentCombo.setModel(model);
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    private void calculatePayroll() {
+
+        String department = String.valueOf(departmentCombo.getSelectedItem());
+        List<Employee> employees = DataRetrieval.getEmployeesByDepartment(department);
+        SalaryCalculator.calculateSalaries(employees);
+        PayrollUpdater.updatePayrollRecords(employees);
+        loadEmployeeTable(department);
+
+    }
+
+    private void generatePaySheets() {
+        generatePaysheets(employees);
+    }
+
+    private void printPaysheets() {
+//        List<Employee> employees = payrollTableModel.getEmployees();
+//        PaysheetPrinter.printPaysheets(employees);
     }
 
     @SuppressWarnings("unchecked")
@@ -48,11 +121,11 @@ public class Salary extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        departmentCombo = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        calculateSalary = new javax.swing.JButton();
+        generatePaysheet = new javax.swing.JButton();
+        printPaysheet = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -89,7 +162,7 @@ public class Salary extends javax.swing.JPanel {
 
         jLabel2.setText("Department");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        departmentCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -99,7 +172,7 @@ public class Salary extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(departmentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(712, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -108,7 +181,7 @@ public class Salary extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departmentCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -116,14 +189,24 @@ public class Salary extends javax.swing.JPanel {
 
         jPanel5.setPreferredSize(new java.awt.Dimension(987, 50));
 
-        jButton1.setText("Calculate Salary");
-
-        jButton2.setText("Print PaySheets");
-
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        calculateSalary.setText("Calculate Salary");
+        calculateSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                calculateSalaryActionPerformed(evt);
+            }
+        });
+
+        generatePaysheet.setText("Generate Paysheets");
+        generatePaysheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generatePaysheetActionPerformed(evt);
+            }
+        });
+
+        printPaysheet.setText("Print Paysheets");
+        printPaysheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printPaysheetActionPerformed(evt);
             }
         });
 
@@ -133,21 +216,22 @@ public class Salary extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(calculateSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(528, Short.MAX_VALUE))
+                .addComponent(generatePaysheet, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(printPaysheet, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(493, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(generatePaysheet, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(printPaysheet, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                    .addComponent(calculateSalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -159,17 +243,17 @@ public class Salary extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Employee_id", "Full Name", "Month", "Year", "Basic Salary", "EPF(8%)", "ETF(12%)", "Taxes", "Overtime", "Deductions", "Paydate", "Net Salary"
+                "Payroll_id", "Full Name", "NIC", "Basic Salary", "EPF(8%)", "ETF(12%)", "Taxes", "Net Salary", "Payment Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,22 +261,43 @@ public class Salary extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void printPaysheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPaysheetActionPerformed
+
+
+    }//GEN-LAST:event_printPaysheetActionPerformed
+
+    private void calculateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateSalaryActionPerformed
+        calculatePayroll();
+
+    }//GEN-LAST:event_calculateSalaryActionPerformed
+
+    private void generatePaysheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePaysheetActionPerformed
+
+
+    }//GEN-LAST:event_generatePaysheetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton calculateSalary;
+    private javax.swing.JComboBox<String> departmentCombo;
+    private javax.swing.JButton generatePaysheet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -202,5 +307,6 @@ public class Salary extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton printPaysheet;
     // End of variables declaration//GEN-END:variables
 }

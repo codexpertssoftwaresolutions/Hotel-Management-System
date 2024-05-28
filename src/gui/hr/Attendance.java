@@ -11,6 +11,8 @@ import model.MySQL;
 
 public class Attendance extends javax.swing.JPanel {
 
+   
+
     public Attendance() {
         initComponents();
         jTextField1.grabFocus();
@@ -222,7 +224,6 @@ public class Attendance extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        // TODO add your handling code here:
 
         String employeecode = jTextField1.getText();
         Date d = new Date();
