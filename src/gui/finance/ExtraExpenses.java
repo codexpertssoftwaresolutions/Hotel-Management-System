@@ -18,13 +18,16 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class ExtraExpenses extends javax.swing.JPanel {
 
+    private ResultSet loggedUser;
+    
     HashMap<String, String> paymentMap = new HashMap<>();
 
-    public ExtraExpenses() {
+    public ExtraExpenses(ResultSet loggedUser) {
         initComponents();
         setTableAction();
         loadTable();
         loadPaymentTypes();
+        this.loggedUser = loggedUser;
     }
 
     private void loadPaymentTypes() {
@@ -221,7 +224,7 @@ public class ExtraExpenses extends javax.swing.JPanel {
 
             MySQL.execute("INSERT INTO `extra_expense` "
                     + "(`extra_expense_cost`,`extra_expense_description`,`extra_expense_date`,`payment_method_id`,`administrator_nic`) "
-                    + "VALUES ('" + amount + "','" + description + "','" + dateTime + "','" + paymentID + "','" + 2002111222 + "')");
+                    + "VALUES ('" + amount + "','" + description + "','" + dateTime + "','" + paymentID + "','" + loggedUser.getString("nic") + "')");
 
             String path = "src/gui/finance/hotelmanagementfinance.jasper";
             

@@ -15,7 +15,7 @@ public class Salary extends javax.swing.JPanel {
         initComponents();
         setTableAction();
         loadDepartments();
-//        loadTable();
+        loadTable();
     }
 
     private void loadDepartments() {
@@ -44,16 +44,27 @@ public class Salary extends javax.swing.JPanel {
 
         try {
 
-            ResultSet resultset = MySQL.execute("");
+            ResultSet resultset = MySQL.execute("SELECT\n"
+                    + "`department`.`department_name`,\n"
+                    + "SUM(`payroll`.`net_salary`) AS `total_netsalary`,\n"
+                    + "`payroll`.`payment_date`\n"
+                    + "FROM `payroll`\n"
+                    + "INNER JOIN `employee`\n"
+                    + "ON `employee`.`nic`=`payroll`.`employee_nic`\n"
+                    + "INNER JOIN `employee_role`\n"
+                    + "ON `employee_role`.`employee_role_id` = `employee`.`employee_role_id`\n"
+                    + "INNER JOIN `department`\n"
+                    + "ON `department`.`department_id` = `employee_role`.`department_id`\n"
+                    + "GROUP BY `department`.`department_id`");
 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
 
             while (resultset.next()) {
                 Vector<String> vector = new Vector<>();
-                vector.add(resultset.getString(""));
-                vector.add(resultset.getString(""));
-                vector.add(resultset.getString(""));
+                vector.add(resultset.getString("payment_date"));
+                vector.add(resultset.getString("department_name"));
+                vector.add(resultset.getString("total_netsalary"));
                 model.addRow(vector);
             }
 
@@ -186,18 +197,32 @@ public class Salary extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        String department = String.valueOf(jComboBox1.getSelectedItem());
+
         try {
 
-            ResultSet resultset = MySQL.execute("");
+            ResultSet resultset = MySQL.execute("SELECT\n"
+                    + "`department`.`department_name`,\n"
+                    + "SUM(`payroll`.`net_salary`) AS `total_netsalary`,\n"
+                    + "`payroll`.`payment_date`\n"
+                    + "FROM `payroll`\n"
+                    + "INNER JOIN `employee`\n"
+                    + "ON `employee`.`nic`=`payroll`.`employee_nic`\n"
+                    + "INNER JOIN `employee_role`\n"
+                    + "ON `employee_role`.`employee_role_id` = `employee`.`employee_role_id`\n"
+                    + "INNER JOIN `department`\n"
+                    + "ON `department`.`department_id` = `employee_role`.`department_id`\n"
+                    + "WHERE `department`.`department_name` = '" + department + "'"
+                    + "GROUP BY `department`.`department_id`");
 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
 
             while (resultset.next()) {
                 Vector<String> vector = new Vector<>();
-                vector.add(resultset.getString(""));
-                vector.add(resultset.getString(""));
-                vector.add(resultset.getString(""));
+                vector.add(resultset.getString("payment_date"));
+                vector.add(resultset.getString("department_name"));
+                vector.add(resultset.getString("total_netsalary"));
                 model.addRow(vector);
             }
 
