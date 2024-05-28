@@ -37,7 +37,7 @@ public class PayrollUpdater {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 }

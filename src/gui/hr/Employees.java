@@ -53,7 +53,7 @@ public class Employees extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -118,7 +118,7 @@ public class Employees extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+             HRDashBoard.log1.warning(e.toString());
         }
     }
 

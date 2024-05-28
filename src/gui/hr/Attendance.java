@@ -74,7 +74,7 @@ public class Attendance extends javax.swing.JPanel {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
 
     }
@@ -275,7 +275,7 @@ public class Attendance extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 

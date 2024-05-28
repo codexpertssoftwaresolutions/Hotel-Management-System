@@ -80,7 +80,7 @@ public class Resignation extends javax.swing.JDialog {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+           HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -556,7 +556,7 @@ public class Resignation extends javax.swing.JDialog {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                HRDashBoard.log1.warning(e.toString());
             }
         }
 

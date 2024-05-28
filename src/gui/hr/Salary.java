@@ -57,7 +57,7 @@ public class Salary extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -80,7 +80,7 @@ public class Salary extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+           HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -111,7 +111,7 @@ public class Salary extends javax.swing.JPanel {
             JasperPrint report = JasperFillManager.fillReport("src/reports/paysheets.jasper", parameters, datasource);
             JasperViewer.viewReport(report, false);
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 

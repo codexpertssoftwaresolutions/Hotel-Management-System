@@ -31,7 +31,7 @@ public class DataRetrieval {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            HRDashBoard.log1.warning(e.toString());
         }
         return employees;
     }

@@ -261,7 +261,7 @@ public class AddNewAdministrator extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+               HRDashBoard.log1.warning(e.toString());
             }
         }
 

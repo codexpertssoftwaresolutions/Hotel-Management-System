@@ -94,7 +94,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            HRDashBoard.log1.warning(e.toString());;
         }
     }
 
@@ -113,7 +113,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -495,7 +495,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                HRDashBoard.log1.warning(e.toString());
 
             }
 

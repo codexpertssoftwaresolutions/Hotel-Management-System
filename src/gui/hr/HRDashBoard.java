@@ -5,16 +5,34 @@ import javaswingdev.drawer.Drawer;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
+import java.util.logging.SimpleFormatter;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javaswingdev.drawer.EventDrawer;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import java.util.logging.Logger;
 import model.DrawerHeader;
+import java.util.logging.FileHandler;
 
 public class HRDashBoard extends javax.swing.JFrame {
 
     private DrawerController drawer;
+    public static Logger log1;
+    public static FileHandler handler1;
+    
+    
+    static {
+        try {
+            log1 = Logger.getLogger("log1");
+            handler1 = new FileHandler("Hrlog.txt",true);
+            handler1.setFormatter(new SimpleFormatter());
+            log1.addHandler(handler1);
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    
+    }
 
     public HRDashBoard(ResultSet loggedUser) {
         initComponents();
@@ -25,7 +43,6 @@ public class HRDashBoard extends javax.swing.JFrame {
                 .addChild(new DrawerItem("Dashboard").build())
                 .addChild(new DrawerItem("Manage Employees").build())
                 .addChild(new DrawerItem("Manage Payroll").build())
-                .addChild(new DrawerItem("Manage Resignation").build())
                 .addChild(new DrawerItem("Manage Attendance").build())
                 .addChild(new DrawerItem("Manage Administrators").build())
                 .addFooter(new DrawerItem("Log out").build())
@@ -55,7 +72,6 @@ public class HRDashBoard extends javax.swing.JFrame {
                 .addChild(new DrawerItem("Dashboard").build())
                 .addChild(new DrawerItem("Manage Employees").build())
                 .addChild(new DrawerItem("Manage Payroll").build())
-                .addChild(new DrawerItem("Manage Resignation").build())
                 .addChild(new DrawerItem("Manage Attendance").build())
                 .addChild(new DrawerItem("Manage Administrators").build())
                 .addFooter(new DrawerItem("Log out").build())
@@ -89,12 +105,9 @@ public class HRDashBoard extends javax.swing.JFrame {
             Salary salary = new Salary();
             bottomPanel.add(salary, BorderLayout.CENTER);
         } else if (tab == 3) {
-//            Resignation resignation = new Resignation(this,true);
-//            bottomPanel.add(resignation, BorderLayout.CENTER);
-        } else if (tab == 4) {
             Attendance attendance = new Attendance();
             bottomPanel.add(attendance, BorderLayout.CENTER);
-        } else if (tab == 5) {
+        } else if (tab == 4) {
             Administrators admin = new Administrators();
             bottomPanel.add(admin, BorderLayout.CENTER);
         }
