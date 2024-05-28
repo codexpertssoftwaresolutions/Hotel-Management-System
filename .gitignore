@@ -7,6 +7,7 @@ nbdist/
 .idea/
 *.nbattrs
 
+
 # Generic files
 *.class
 *.log

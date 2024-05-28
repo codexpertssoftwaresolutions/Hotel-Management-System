@@ -152,7 +152,7 @@ public class CarParkDashBoard extends javax.swing.JFrame {
             Available available = new Available(drawer);
             bottomPanel.add(available, BorderLayout.CENTER);
         } else if (tab == 2) {
-            Parking parking = new Parking(drawer);
+            Parking parking = new Parking(drawer, this);
             bottomPanel.add(parking, BorderLayout.CENTER);
         } else if (tab == 3) {
             Ticket ticket = new Ticket(drawer);
