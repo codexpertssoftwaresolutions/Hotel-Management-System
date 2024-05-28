@@ -1,20 +1,27 @@
 package gui.carpark;
 
-import javaswingdev.drawer.DrawerController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import model.MySQL;
 import model.TableActionCellEditor;
 import model.TableActionCellRender;
 import model.TableActionEvent;
 
 public class Parking extends javax.swing.JPanel {
 
-    private DrawerController drawer;
     private javax.swing.JFrame mainFrame;
 
-    public Parking(DrawerController drawer, javax.swing.JFrame mainFrame) {
+    public Parking(javax.swing.JFrame mainFrame) {
         initComponents();
         setTableAction();
-        this.drawer = drawer;
         this.mainFrame = mainFrame;
+        loadTable();
     }
 
     private void setTableAction() {
@@ -143,14 +150,91 @@ public class Parking extends javax.swing.JPanel {
 
     private void openTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openTicketActionPerformed
         OpenTicket ot = new OpenTicket(mainFrame, true);
+        ot.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                loadTable();
+            }
+
+        });
         ot.setVisible(true);
     }//GEN-LAST:event_openTicketActionPerformed
 
     private void closeTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeTicketActionPerformed
         CloseTicket ct = new CloseTicket(mainFrame, true);
+        ct.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                loadTable();
+            }
+
+        });
         ct.setVisible(true);
     }//GEN-LAST:event_closeTicketActionPerformed
 
+    private void loadTable() {
+        String query = "SELECT * FROM `parking_ticket`"
+                + " INNER JOIN `vehicle_type` ON `vehicle_type`.`vehicle_type_id`=`parking_ticket`.`vehicle_type_id`"
+                + " ORDER BY `parking_ticket_id` DESC";
+
+        try {
+            ResultSet resultset = MySQL.execute(query);
+
+            DefaultTableModel model = (DefaultTableModel) parkingDetailsTable.getModel();
+
+            model.setRowCount(0);
+
+            while (resultset.next()) {
+
+                String arrivalTime = resultset.getString("arrival_time");
+                String departureTime = resultset.getString("departure_time");
+
+                if (departureTime == null) {
+
+                    Vector row = new Vector();
+                    row.add(resultset.getString("parking_ticket_id"));
+                    row.add(resultset.getString("parking_ticket_customer"));
+                    row.add(resultset.getString("parking_ticket_mobile"));
+                    row.add(resultset.getString("vehicle_type_name"));
+                    row.add(arrivalTime);
+                    row.add("-");
+                    row.add(resultset.getString("parked_space"));
+                    row.add("-");
+                    row.add("-");
+                    model.addRow(row);
+
+                } else {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime arrTime = LocalDateTime.parse(arrivalTime, formatter);
+                    LocalDateTime depTime = LocalDateTime.parse(departureTime, formatter);
+
+                    Duration duration = Duration.between(arrTime, depTime);
+                    int spentHours = (int) duration.toHours();
+
+                    if (spentHours == 0) {
+                        spentHours = 1;
+                    }
+
+                    String total = String.valueOf(resultset.getInt("fee") * spentHours);
+
+                    Vector row = new Vector();
+                    row.add(resultset.getString("parking_ticket_id"));
+                    row.add(resultset.getString("parking_ticket_customer"));
+                    row.add(resultset.getString("parking_ticket_mobile"));
+                    row.add(resultset.getString("vehicle_type_name"));
+                    row.add(arrivalTime);
+                    row.add(departureTime);
+                    row.add(resultset.getString("parked_space"));
+                    row.add(spentHours);
+                    row.add(total);
+                    model.addRow(row);
+                }
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeTicket;
