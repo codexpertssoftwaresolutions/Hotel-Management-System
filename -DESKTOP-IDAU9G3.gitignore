@@ -1,0 +1,39 @@
+# NetBeans specific files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.idea/
+*.nbattrs
+
+.gitignore
+
+# Generic files
+*.class
+*.log
+*.war
+*.ear
+
+# Temporary files
+*~
+*.bak
+*.swp
+
+# Compiled files
+*.class
+*.war
+*.ear
+
+# Maven specific files
+target/
+
+# Gradle specific files
+.gradle/
+build/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+src/model/MySQL.java
