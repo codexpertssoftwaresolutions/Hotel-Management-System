@@ -1,5 +1,6 @@
 package gui.hr;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import model.MySQL;
 import java.sql.ResultSet;
 
@@ -15,6 +16,16 @@ public class Dashboard extends javax.swing.JPanel {
         getResignedEmployeeCount();
         getTotalPaySheetCount();
         getCurrentlyWorkingEmployeeCount();
+        jPanel2.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel3.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel4.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel5.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel6.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel7.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel8.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+        jPanel9.putClientProperty(FlatClientProperties.STYLE, "arc: 999");
+
+
     }
 
     private void getActiveEmployees() {
@@ -102,7 +113,7 @@ public class Dashboard extends javax.swing.JPanel {
 
     private void getTotalPaySheetCount() {
         try {
-            ResultSet rs = MySQL.execute("SELECT COUNT(`pay_id`)AS pay FROM payroll");
+            ResultSet rs = MySQL.execute("SELECT COUNT(`payroll_id`)AS pay FROM payroll");
             rs.next();
 
             jLabel16.setText(rs.getString("pay"));
@@ -120,7 +131,7 @@ public class Dashboard extends javax.swing.JPanel {
                     + "WHERE working_status.working_status_name ='Working';");
             rs.next();
 
-            jLabel4.setText(rs.getString("ws"));
+            jLabel7.setText(rs.getString("ws"));
 
         } catch (Exception e) {
             HRDashBoard.log1.warning(e.toString());
@@ -178,7 +189,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Active Employees");
 
-        jLabel18.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("0");
@@ -214,7 +225,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Departments");
 
-        jLabel16.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("0");
@@ -250,7 +261,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Present Count");
 
-        jLabel14.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("0");
@@ -281,7 +292,7 @@ public class Dashboard extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(102, 0, 51));
         jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel11.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("0");
@@ -316,7 +327,7 @@ public class Dashboard extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(0, 204, 102));
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel9.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("0");
@@ -352,7 +363,7 @@ public class Dashboard extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(255, 0, 102));
         jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel7.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("0");
@@ -388,7 +399,7 @@ public class Dashboard extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(153, 0, 153));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel5.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("0");
@@ -428,7 +439,7 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Currently Working Employees");
 
-        jLabel4.setFont(new java.awt.Font("Showcard Gothic", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("0");

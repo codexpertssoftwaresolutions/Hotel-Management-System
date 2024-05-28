@@ -33,7 +33,6 @@ public class Employees extends javax.swing.JPanel {
     }
 
     private void reset() {
-        jTextField2.grabFocus();
         jButton2.setEnabled(false);
         jTable1.clearSelection();
 
@@ -67,29 +66,18 @@ public class Employees extends javax.swing.JPanel {
         String nic = jTextField2.getText();
         String department = String.valueOf(jComboBox3.getSelectedItem());
 
-        if (nic.equals("Search by NIC") && department.equals("Select")) {//0-0
+        if (nic.isEmpty() && department.equals("Select")) {//0-0
             query += "";
 
-        } else if (nic.equals("") && department.equals("Select")) {//0-0
-            query += "";
-
-        } else if (!nic.equals("") && department.equals("Select")) {//1-0
+        } else if (!nic.isEmpty() && department.equals("Select")) {//0-0
             query += "WHERE `nic` LIKE '" + nic + "%'";
 
-        } else if (!nic.equals("Search by NIC") && department.equals("Select")) {//1-0
-            query += "WHERE `nic` LIKE '" + nic + "%'";
+        } else if (nic.isEmpty() && !department.equals("Select")) {//0-0
+            query += "WHERE `department_name` = '" + department + "'";
 
-        } else if (nic.equals("") && !department.equals("Select")) {//0-1
-            query += "WHERE `department_name` LIKE '" + department + "%'";
+        } else if (!nic.isEmpty() && !department.equals("Select")) {//1-0
+            query += "WHERE `nic` LIKE '" + nic + "%' AND `department_name`='" + department + "'";
 
-        } else if (nic.equals("Search by NIC") && !department.equals("Select")) {//0-1
-            query += "WHERE `department_name`='" + department + "'";
-
-        } else if (!nic.equals("Search by NIC") && !department.equals("Select")) {//1-1
-            query += "WHERE `department_name`='" + department + "' OR `nic`='" + nic + "%'";
-
-        } else if (!nic.equals("") && !department.equals("Select")) {//1-1
-            query += "WHERE `department_name`='" + department + "' OR `nic`='" + nic + "%'";
         }
 
         try {
@@ -118,7 +106,7 @@ public class Employees extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-             HRDashBoard.log1.warning(e.toString());
+            HRDashBoard.log1.warning(e.toString());
         }
     }
 
@@ -193,7 +181,6 @@ public class Employees extends javax.swing.JPanel {
 
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("Search by NIC");
         jTextField2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField2.setMargin(new java.awt.Insets(2, 30, 2, 6));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -228,6 +215,11 @@ public class Employees extends javax.swing.JPanel {
         jComboBox3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox3ItemStateChanged(evt);
+            }
+        });
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
             }
         });
         jPanel2.add(jComboBox3);
@@ -379,6 +371,10 @@ public class Employees extends javax.swing.JPanel {
         reset();
         loadEmployeeTable();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

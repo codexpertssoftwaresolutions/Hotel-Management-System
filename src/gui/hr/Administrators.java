@@ -19,79 +19,31 @@ public class Administrators extends javax.swing.JPanel {
         render.setHorizontalAlignment(SwingConstants.CENTER);
         jTable1.setDefaultRenderer(Object.class, render);
         jTable1.setAutoCreateRowSorter(true);
-        loadDepartment();
     }
 
     private void reset() {
         jTable1.clearSelection();
-        jTextField2.grabFocus();
         jButton2.setEnabled(false);
 
     }
 
-    private void loadDepartment() {
-        try {
-            ResultSet resultSet = MySQL.execute("SELECT * FROM `department`");
-
-            Vector<String> vector = new Vector<>();
-            vector.add("Select");
-
-            while (resultSet.next()) {
-                vector.add(resultSet.getString("department_name"));
-                DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-                jComboBox3.setModel(model);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-    
     private void loadEmployeeTable() {
         String query = "SELECT * FROM `employee` \n"
                 + "INNER JOIN `employee_role` ON (employee.employee_role_id=employee_role.employee_role_id)\n"
                 + "INNER JOIN  `department` ON (employee_role.department_id=department.department_id)\n"
                 + "INNER JOIN `position` ON (employee_role.position_id=`position`.position_id)\n"
                 + "INNER JOIN `status` ON (employee.status_id=`status`.status_id)\n"
-                + "INNER JOIN `administrator` ON (employee.nic=administrator.employee_nic) WHERE `status`.`status`='Active';";
+                + "INNER JOIN `administrator` ON (employee.nic=administrator.employee_nic) ";
 
-        
         String nic = jTextField2.getText();
-        String department = String.valueOf(jComboBox3.getSelectedItem());
 
-        if (nic.equals("Search by NIC") && department.equals("Select")) {//0-0
-            query += "";
+        if (nic.equals("Search by NIC")| nic.isEmpty()) {
+            query += "WHERE `status`.`status`='Active'";
+        } else if (!nic.isEmpty()) {
+            query += "WHERE `status`.`status`='Active' AND `nic` LIKE '" + nic + "%'";
 
-        } else if (nic.equals("") && department.equals("Select")) {//0-0
-            query += "";
+        }
 
-        } 
-        else if (!nic.equals("") && department.equals("Select")) {//1-0
-            query += "WHERE `nic` LIKE '" + nic + "%'";
-
-        } 
-//        else if (!nic.equals("Search by NIC") && department.equals("Select")) {//1-0
-//            query += "WHERE `nic` LIKE '" + nic + "%'";
-//
-//        } 
-//        else if (nic.equals("") && !department.equals("Select")) {//0-1
-//            query += "WHERE `department_name` LIKE '" + department + "%'";
-//
-//        }
-//        else if (nic.equals("Search by NIC") && !department.equals("Select")) {//0-1
-//            query += "WHERE `department_name`='" + department + "'";
-//
-//        }
-//        else if(!nic.equals("Search by NIC") && !department.equals("Select")){//1-1
-//        query += "WHERE `department_name`='" + department + "%' OR `nic`='"+nic+"%'";
-//        
-//        }
-//        else if(!nic.equals("") && !department.equals("Select")){//1-1
-//        query += "WHERE `department_name`='" + department + "' OR `nic`='"+nic+"%'";
-//        }
-        
-        
-        
         try {
             java.sql.ResultSet resultSet = MySQL.execute(query);
 
@@ -130,7 +82,6 @@ public class Administrators extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -173,22 +124,17 @@ public class Administrators extends javax.swing.JPanel {
                 jTextField2MouseExited(evt);
             }
         });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
             }
         });
         jPanel2.add(jTextField2);
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(72, 15));
-        jComboBox3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox3ItemStateChanged(evt);
-            }
-        });
-        jPanel2.add(jComboBox3);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Add New Admins");
@@ -225,7 +171,7 @@ public class Administrators extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jButton3)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,11 +267,6 @@ public class Administrators extends javax.swing.JPanel {
         loadEmployeeTable();
     }//GEN-LAST:event_jTextField2KeyReleased
 
-    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-        // TODO add your handling code here:
-        loadEmployeeTable();
-    }//GEN-LAST:event_jComboBox3ItemStateChanged
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         AddNewAdministrator n_admins = new AddNewAdministrator();
@@ -362,12 +303,15 @@ public class Administrators extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

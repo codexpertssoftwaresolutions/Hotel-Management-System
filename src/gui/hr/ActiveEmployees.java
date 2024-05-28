@@ -1,10 +1,18 @@
 package gui.hr;
 
+import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import java.sql.DriverManager;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 public class ActiveEmployees extends javax.swing.JFrame {
     
@@ -21,6 +29,22 @@ public class ActiveEmployees extends javax.swing.JFrame {
         render.setHorizontalAlignment(SwingConstants.CENTER);        
         jTable1.setDefaultRenderer(Object.class, render);
         jTable1.setAutoCreateRowSorter(true);
+        getActiveEmployees();
+    }
+    private void getActiveEmployees() {
+
+        try {
+
+            ResultSet rs = MySQL.execute("SELECT COUNT(`nic`) AS a FROM employee \n"
+                    + "INNER JOIN `status` ON (`status`.status_id=employee.status_id) WHERE `status`.`status`='Active'");
+            rs.next();
+            jLabel2.setText("('"+rs.getString("a")+"')");
+
+        } catch (Exception e) {
+//            HRDashBoard.log1.warning(e.toString());
+            HRDashBoard.log1.warning(e.toString());
+        }
+
     }
     
     private void loadEmployeeTable() {
@@ -111,6 +135,11 @@ public class ActiveEmployees extends javax.swing.JFrame {
         jLabel1.setText("Active Employees");
 
         jButton1.setText("Print all Active Employees");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("()");
@@ -174,6 +203,20 @@ public class ActiveEmployees extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        try {
+
+            JRTableModelDataSource datasource = new JRTableModelDataSource(jTable1.getModel());
+            JasperPrint report = JasperFillManager.fillReport("src/reports/ActiveEmployee.jasper",null,datasource);
+            JasperViewer.viewReport(report,true);
+
+        } catch (Exception e) {
+           HRDashBoard.log1.warning(e.toString());
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

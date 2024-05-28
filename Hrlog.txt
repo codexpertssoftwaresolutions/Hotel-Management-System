@@ -256,3 +256,65 @@ May 29, 2024 1:02:31 AM gui.hr.Dashboard getTotalPaySheetCount
 WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
 May 29, 2024 1:03:03 AM gui.hr.Dashboard getTotalPaySheetCount
 WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
+May 29, 2024 1:14:22 AM gui.hr.Dashboard getTotalPaySheetCount
+WARNING: java.sql.SQLSyntaxErrorException: Unknown column 'pay_id' in 'field list'
+May 29, 2024 1:15:03 AM gui.hr.Resignation loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+May 29, 2024 1:15:04 AM gui.hr.Resignation loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+May 29, 2024 1:15:06 AM gui.hr.Resignation loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+May 29, 2024 1:24:33 AM gui.hr.Resignation loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%' at line 1
+May 29, 2024 1:24:35 AM gui.hr.Resignation loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%' at line 1
+May 29, 2024 1:37:10 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2%'' at line 6
+May 29, 2024 1:37:10 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '20%'' at line 6
+May 29, 2024 1:37:10 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '200%'' at line 6
+May 29, 2024 1:37:10 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '2000%'' at line 6
+May 29, 2024 1:37:11 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE '20000%'' at line 6
+May 29, 2024 1:41:40 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `department_name` = 'Item 1'' at line 6
+May 29, 2024 1:41:47 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `department_name` = 'Finance'' at line 6
+May 29, 2024 1:41:47 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `department_name` = 'Finance'' at line 6
+May 29, 2024 1:41:49 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wad%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:41:49 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wada%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:41:49 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wada%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:41:50 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wadada%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:41:50 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wadada%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:41:50 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'wadada%' AND `department_name`='Finance'' at line 6
+May 29, 2024 1:43:50 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `department_name` = 'Item 1'' at line 6
+May 29, 2024 1:58:03 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `department_name` = 'Item 1'' at line 6
+May 29, 2024 2:06:39 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'Search by NIC%'' at line 6
+May 29, 2024 2:09:03 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'Search by NIC%'' at line 6
+May 29, 2024 2:09:47 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `nic` LIKE 'Search by NIC%'' at line 6
+May 29, 2024 2:17:02 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `status`.`status`='Active' AND `nic`='Search by NIC'' at line 6
+May 29, 2024 2:17:17 AM gui.hr.Administrators loadEmployeeTable
+WARNING: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `status`.`status`='Active' AND `nic`='Search by NIC'' at line 6
+May 29, 2024 2:43:55 AM gui.hr.ActiveEmployees jButton1ActionPerformed
+WARNING: net.sf.jasperreports.engine.JRException: java.io.FileNotFoundException: src\reports\ActiceEmployee.jasper
+May 29, 2024 2:44:12 AM gui.hr.ActiveEmployees jButton1ActionPerformed
+WARNING: net.sf.jasperreports.engine.JRException: java.io.FileNotFoundException: src\reports\ActiceEmployee.jasper
+May 29, 2024 2:58:13 AM gui.hr.ActiveEmployees jButton1ActionPerformed
+WARNING: java.lang.ArrayIndexOutOfBoundsException: 9 >= 8
+May 29, 2024 2:59:11 AM gui.hr.ActiveEmployees jButton1ActionPerformed
+WARNING: java.lang.ArrayIndexOutOfBoundsException: 8 >= 8

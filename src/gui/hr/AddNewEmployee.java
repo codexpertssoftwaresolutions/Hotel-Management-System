@@ -49,6 +49,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
         jTextField6.putClientProperty("JComponent.roundRect", true);
         jTextField3.putClientProperty("JComponent.roundRect", true);
         textfieldLoad(tableSelection);
+        jLabel2.setText("Update Employee");
 
     }
 
@@ -360,6 +361,7 @@ public class AddNewEmployee extends javax.swing.JFrame {
         });
 
         jButton2.setText("Update");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
