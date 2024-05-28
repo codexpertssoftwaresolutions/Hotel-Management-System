@@ -91,8 +91,6 @@ public class Utility extends javax.swing.JPanel {
                 model.addRow(vector);
             }
             
-            System.out.println("Total Rows Loaded: " + model.getRowCount());
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
