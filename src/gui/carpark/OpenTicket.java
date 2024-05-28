@@ -2,7 +2,6 @@ package gui.carpark;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -10,15 +9,11 @@ import model.MySQL;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.view.JasperViewer;
 
 public class OpenTicket extends javax.swing.JDialog {
 
@@ -28,7 +23,7 @@ public class OpenTicket extends javax.swing.JDialog {
     public OpenTicket(javax.swing.JFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        arrivalField.setText(arrivalPicker.getSelectedTime().replace("PM", "").replace("AM", ""));
+        arrivalField.setText(arrivalPicker.getSelectedTime().replace(" PM", "").replace(" AM", ""));
         loadVehicleType();
     }
 
@@ -166,49 +161,73 @@ public class OpenTicket extends javax.swing.JDialog {
         String fee = feeField.getText();
         String arrivalTime = arrivalField.getText();
         String typeComboValue = String.valueOf(typeCombo.getSelectedItem());
-        String ticketNum;
 
         if (name.isEmpty()) {
             nameField.grabFocus();
         } else if (mobile.isEmpty()) {
             mobileField.grabFocus();
-        } else if (space.isEmpty()) {
+        } else if (space.isEmpty() || Integer.parseInt(space) > 25 || Integer.parseInt(space) < 1) {
             spaceField.grabFocus();
         } else if (fee.isEmpty()) {
             feeField.grabFocus();
         } else if (typeComboValue == "Select") {
         } else {
-            String vehiType = String.valueOf(vehicleTypeList.get(typeComboValue));
-
-            LocalTime time = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm"));
-            LocalDateTime combinedDateTime = LocalDateTime.of(LocalDateTime.now().toLocalDate(), time);
-
-            String arrtime = combinedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
             try {
-
-                ResultSet resultSet = MySQL.execute("INSERT INTO "
-                        + "`parking_ticket`(`parking_ticket_customer`,`parking_ticket_mobile`,`arrival_time`,`parked_space`,`vehicle_type_id`) "
-                        + "VALUES('" + name + "','" + mobile + "','" + arrtime + "','" + space + "','" + vehiType + "') ");
+                ResultSet resultSet = MySQL.execute("SELECT * FROM `parking_ticket` WHERE `parked_space`='" + space + "' AND `departure_time` IS NULL");
 
                 if (resultSet.next()) {
-                    ticketNum = String.valueOf(resultSet.getInt(1));
+                    String Message = "<html><body>"
+                            + "<p><b>" + space + "</b> is already booked!</p>"
+                            + "</body></html>";
 
-                    HashMap<String, Object> parameters = new HashMap<>();
-//                    Date date = new Date();
-//                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MMM-dd");
-//                    String stringDate = format.format(date);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            Message,
+                            "Space Unavailable",
+                            JOptionPane.ERROR_MESSAGE
+                    );
 
-                    parameters.put("Parameter1", name);
-                    parameters.put("Parameter2", mobile);
-                    parameters.put("Parameter3", typeComboValue);
-                    parameters.put("Parameter4", ticketNum);
-                    parameters.put("Parameter5", fee);
-                    parameters.put("Parameter6", space);
-                    parameters.put("Parameter7", arrtime);
+                    spaceField.grabFocus();
+                } else {
+                    String vehiType = String.valueOf(vehicleTypeList.get(typeComboValue));
 
-                    String jrxmlFile = "src/gui/carpark/ticket.jrxml";
-                    String jasperFile = "src/gui/carpark/ParkingTicket.jasper";
+                    LocalTime time = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalDateTime combinedDateTime = LocalDateTime.of(LocalDateTime.now().toLocalDate(), time);
+
+                    String arrtime = combinedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+                    LocalDateTime now = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
+                    String ticketNumber = now.format(formatter);
+
+                    try {
+
+                        MySQL.execute("INSERT INTO "
+                                + "`parking_ticket`(`parking_ticket_id`,`parking_ticket_customer`,`parking_ticket_mobile`,`arrival_time`,`parked_space`,`vehicle_type_id`) "
+                                + "VALUES('" + ticketNumber + "','" + name + "','" + mobile + "','" + arrtime + "','" + space + "','" + vehiType + "') ");
+
+                        arrivalPicker.now();
+                        nameField.setText("");
+                        mobileField.setText("");
+                        spaceField.setText("");
+                        feeField.setText("");
+                        arrivalField.setText(arrivalPicker.getSelectedTime().replace(" PM", "").replace(" AM", ""));
+                        typeCombo.setSelectedItem("Select");
+
+                        HashMap<String, Object> parameters = new HashMap<>();
+
+                        parameters.put("Parameter1", name);
+                        parameters.put("Parameter2", mobile);
+                        parameters.put("Parameter3", typeComboValue);
+                        parameters.put("Parameter4", ticketNumber);
+                        parameters.put("Parameter5", fee);
+                        parameters.put("Parameter6", space);
+                        parameters.put("Parameter7", arrtime);
+
+//                String jrxmlFile = "src/gui/carpark/ticket.jrxml";
+                        String jasperFile = "src/gui/carpark/ParkingTicket.jasper";
 
 //                    try {
 //                        JasperCompileManager.compileReportToFile(jrxmlFile, jasperFile);
@@ -216,19 +235,19 @@ public class OpenTicket extends javax.swing.JDialog {
 //                    } catch (JRException e) {
 //                        e.printStackTrace();
 //                    }
-                    try {
-                        JasperPrint report = JasperFillManager.fillReport(jasperFile, parameters, new JREmptyDataSource());
-//                        JRTableModelDataSource datasource = new JRTableModelDataSource(jTable1.getModel());
-                        JasperPrintManager.printReport(report, true);
-//                        JasperViewer.viewReport(report, false);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        try {
+                            JasperPrint report = JasperFillManager.fillReport(jasperFile, parameters, new JREmptyDataSource());
+                            JasperPrintManager.printReport(report, true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-
                 }
-
             } catch (Exception ex) {
-                ex.printStackTrace();
+
             }
         }
     }//GEN-LAST:event_placeTicketActionPerformed
@@ -249,7 +268,6 @@ public class OpenTicket extends javax.swing.JDialog {
                 vehicleTypeList.put(resultset.getString("vehicle_type_name"), resultset.getInt("vehicle_type_id"));
                 typePrice.put(resultset.getString("vehicle_type_name"), resultset.getInt("fee"));
             }
-
             DefaultComboBoxModel model1 = new DefaultComboBoxModel(typeVector);
             typeCombo.setModel(model1);
         } catch (Exception e) {
