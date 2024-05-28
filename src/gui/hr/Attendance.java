@@ -1,10 +1,47 @@
 package gui.hr;
 
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import model.MySQL;
+
 public class Attendance extends javax.swing.JPanel {
 
     public Attendance() {
         initComponents();
         jTextField2.putClientProperty("JComponent.roundRect", true);
+        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+        render.setHorizontalAlignment(SwingConstants.CENTER);
+        jTable1.setDefaultRenderer(Object.class, render);
+        jTable1.setAutoCreateRowSorter(true);
+
+    }
+    
+    private void loadattendanceTable(){
+    
+    }
+
+    private void loadUserDetails(String employee_code, String date) {
+
+        try {
+            java.sql.ResultSet rs = MySQL.execute("SELECT * FROM `employee` WHERE `nic`='" + employee_code + "'");
+
+            if (rs.next()) {
+                String fname = rs.getString("employee_fname");
+                String lname = rs.getString("employee_lname");
+                String email = rs.getString("employee_email");
+                rs.getString("employee_fname");
+
+                jLabel2.setText(fname + " " + lname);
+                jLabel3.setText(email);
+                jLabel4.setText(date);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -35,6 +72,11 @@ public class Attendance extends javax.swing.JPanel {
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField1.setMargin(new java.awt.Insets(2, 15, 2, 15));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Name");
 
@@ -82,11 +124,11 @@ public class Attendance extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Attend_id", "Employee_id", "Date", "Check-out", "Check-in", "Total Hours"
+                "Attend_id", "Employee NIC", "Check-out", "Check-in"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,6 +231,34 @@ public class Attendance extends javax.swing.JPanel {
     private void jTextField2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2MouseExited
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+
+        String employeecode = jTextField1.getText();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS");
+        String format_date = sdf.format(d);
+        loadUserDetails(employeecode, format_date);
+
+        try {
+            java.sql.ResultSet rs = MySQL.execute("SELECT `check_in_time` FROM `attendance` WHERE `employee_nic`='" + employeecode + "'");
+
+            //checks if there is a checkintime
+            if (rs.next()) {//mark leave
+
+                MySQL.execute("UPDATE `attendance` SET `check_out_time`='" + format_date + "'");
+
+            } else {//mark attendance
+
+                MySQL.execute("INSERT INTO `attendance`(employee_nic`,`check_in_time`) VALUES('" + employeecode + "','" + format_date + "')");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

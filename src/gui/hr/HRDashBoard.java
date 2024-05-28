@@ -1,5 +1,6 @@
 package gui.hr;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import javaswingdev.drawer.Drawer;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.BorderLayout;
@@ -17,6 +18,7 @@ public class HRDashBoard extends javax.swing.JFrame {
 
     public HRDashBoard(ResultSet loggedUser) {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         drawer = Drawer.newDrawer(this)
                 .header(new DrawerHeader())
                 .enableScroll(true)
@@ -46,6 +48,7 @@ public class HRDashBoard extends javax.swing.JFrame {
 
     public HRDashBoard() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         drawer = Drawer.newDrawer(this)
                 .header(new DrawerHeader())
                 .enableScroll(true)
@@ -121,7 +124,6 @@ public class HRDashBoard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
-        setResizable(false);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         background.setLayout(new java.awt.BorderLayout());
@@ -170,8 +172,8 @@ public class HRDashBoard extends javax.swing.JFrame {
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
 //        UIManager.put("Button.arc", 150);
-//        UIManager.put("TextComponent.arc", 999);
-//        UIManager.put("Component.arc", 999);
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Component.arc", 999);
         UIManager.put("Component.arrowType", "triangle");
         UIManager.put("TextComponent.innerFocusWidth", 1);
 

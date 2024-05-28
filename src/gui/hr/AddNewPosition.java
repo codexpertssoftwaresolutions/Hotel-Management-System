@@ -3,6 +3,8 @@ package gui.hr;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
 import model.TableActionCellEditor;
@@ -22,6 +24,10 @@ public class AddNewPosition extends javax.swing.JFrame {
         loadPositionTable();
         setTableAction();
         jLabel2.setVisible(false);
+        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+        render.setHorizontalAlignment(SwingConstants.CENTER);        
+        jTable1.setDefaultRenderer(Object.class, render);
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     private void reset() {

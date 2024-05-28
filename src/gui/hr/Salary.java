@@ -1,10 +1,42 @@
 
 package gui.hr;
 
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import model.MySQL;
+
 public class Salary extends javax.swing.JPanel {
 
     public Salary() {
         initComponents();
+        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+        render.setHorizontalAlignment(SwingConstants.CENTER);        
+        jTable1.setDefaultRenderer(Object.class, render);
+        jTable1.setAutoCreateRowSorter(true);
+        loadDepartment();
+    }
+    
+    
+      private void loadDepartment() {
+        try {
+            ResultSet resultSet = MySQL.execute("SELECT * FROM `department`");
+
+            Vector<String> vector = new Vector<>();
+            vector.add("Select");
+
+            while (resultSet.next()) {
+                vector.add(resultSet.getString("department_name"));
+//                departments.put(resultSet.getString("department_name"), resultSet.getInt("department_id"));
+                DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
+                jComboBox1.setModel(model);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +87,7 @@ public class Salary extends javax.swing.JPanel {
 
         jPanel4.setPreferredSize(new java.awt.Dimension(987, 50));
 
-        jLabel2.setText("Deapertment");
+        jLabel2.setText("Department");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
