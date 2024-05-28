@@ -6,6 +6,7 @@ dist/
 nbdist/
 .idea/
 *.nbattrs
+.gitignore
 
 # Generic files
 *.class
@@ -33,3 +34,5 @@ build/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+src/model/MySQL.java

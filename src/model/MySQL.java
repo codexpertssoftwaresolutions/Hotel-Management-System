@@ -8,8 +8,8 @@ import java.sql.Statement;
 public class MySQL {
 
     private static Connection connection;
-    private static final String db = "";
-    private static final String password = "";
+    private static final String db = "hotelsystem";
+    private static final String password = "Mysql@091908";
     private static final String host = "localhost";
     private static final String port = "3306";
 
