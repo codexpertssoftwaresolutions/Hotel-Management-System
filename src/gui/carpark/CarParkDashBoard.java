@@ -43,7 +43,7 @@ public class CarParkDashBoard extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        Dashboard dashboard = new Dashboard(drawer);
+        Dashboard dashboard = new Dashboard();
         bottomPanel.add(dashboard, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
@@ -71,7 +71,7 @@ public class CarParkDashBoard extends javax.swing.JFrame {
                 })
                 .build();
 
-        Dashboard dashboard = new Dashboard(drawer);
+        Dashboard dashboard = new Dashboard();
         bottomPanel.add(dashboard, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(this);
         repaint();
@@ -146,16 +146,16 @@ public class CarParkDashBoard extends javax.swing.JFrame {
         bottomPanel.removeAll();
 
         if (tab == 0) {
-            Dashboard dashboard = new Dashboard(drawer);
+            Dashboard dashboard = new Dashboard();
             bottomPanel.add(dashboard, BorderLayout.CENTER);
         } else if (tab == 1) {
-            Available available = new Available(drawer);
+            Available available = new Available();
             bottomPanel.add(available, BorderLayout.CENTER);
         } else if (tab == 2) {
-            Parking parking = new Parking(drawer, this);
+            Parking parking = new Parking(this);
             bottomPanel.add(parking, BorderLayout.CENTER);
         } else if (tab == 3) {
-            Ticket ticket = new Ticket(drawer);
+            Ticket ticket = new Ticket(this);
             bottomPanel.add(ticket, BorderLayout.CENTER);
         }
 
